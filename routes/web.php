@@ -48,14 +48,14 @@ Route::post('/search', function (Request $request) {
     return view('search', compact('response'));
 });
 
-Route::get('/myfav/{imdbID}', function ($imdbID){
+Route::get('/search/{imdbID}', function ($imdbID){
 $savedmovie = Savedmovie::create([
     'imdbID' => $imdbID,
     'user_id' => auth()->user()->id
     ]);
-    return view('myfav');
+    return view('search');
 
-    })->middleware(['auth'])->name('myfav');
+    })->middleware(['auth'])->name('search');
 
     require __DIR__.'/auth.php';
 

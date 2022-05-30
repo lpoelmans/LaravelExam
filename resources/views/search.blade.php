@@ -33,7 +33,7 @@
                     <p>{{$item->Type}} from {{$item->Year}}</p>
                     <img src="{{$item->Poster}}" class="card-img-top">
                     @auth
-                    <button class="btn btn-secondary m-3" href="/myfav/{{$item->imdbID}}">Save</button>
+                    <button class="btn btn-secondary m-3"><a href="/search/{{$item->imdbID}}" class="text-white">Save</a></button>
                     @endauth
                 </div>
             @endforeach 
