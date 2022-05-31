@@ -27,6 +27,7 @@ Route::get('/search', function () {
 
 Route::get('/myfav', function () {
     $savedmovies = \App\Models\User::with('savedmovie')->find(auth()->user())->first();
+    //dd ($savedmovies);
     return view('myfav', compact('savedmovies'));
 })->middleware(['auth'])->name('myfav');
 
@@ -49,18 +50,20 @@ Route::post('/search', function (Request $request) {
 });
 
 Route::get('/search/{imdbID}', function ($imdbID){
-$savedmovie = Savedmovie::create([
+$savedmovie = Savedmovie::Create([
     'imdbID' => $imdbID,
     'user_id' => auth()->user()->id
     ]);
-    return view('search');
+    return redirect ('search');
 
     })->middleware(['auth'])->name('search');
 
     require __DIR__.'/auth.php';
 
 Route::post('/surprise', function (Request $request) {
-    $response = Http::get('http://www.omdbapi.com/?i=tt3896198&apikey=ad34cbc1&type=');
+    $word = ['wie','who','why','was','world','wonka','warm','wet','way','water','wish','well','wife','worst','willy','war','worm','wash','waarom','wanneer','waar','wagon'];
+    $randomword = Arr::random($word);
+    $response = Http::POST('http://www.omdbapi.com/?i=tt3896198&apikey=ad34cbc1&s='.$randomword);
     $response = json_decode($response);
 
 /*     dd($response);
