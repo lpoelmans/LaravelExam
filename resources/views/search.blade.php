@@ -29,7 +29,7 @@
             <h1 class="mt-5">Results</h1>
             <div class="row mt-5">
                 @foreach ($response->Search as $item )
-                        <div class="card" style="width:25%"> 
+                    <div class="card" style="width:25%"> 
                         <h2 class="mt-3">{{$item->Title}}</h2>
                         <p>{{$item->Type}} from {{$item->Year}}</p>
                         <img src="{{$item->Poster}}" class="card-img-top">

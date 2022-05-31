@@ -27,7 +27,7 @@ Route::get('/search', function () {
 
 Route::get('/myfav', function () {
     $savedmovies = \App\Models\User::with('savedmovie')->find(auth()->user())->first();
-    //dd ($savedmovies);
+   
     return view('myfav', compact('savedmovies'));
 })->middleware(['auth'])->name('myfav');
 
@@ -43,14 +43,14 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 
 Route::post('/search', function (Request $request) {
     $search = $request->input('movie');
-    $response = Http::get('http://www.omdbapi.com/?i=tt3896198&apikey=ad34cbc1&s='.$search);
+    $response = Http::get('http://www.omdbapi.com/?apikey=ad34cbc1&s='.$search);
     $response = json_decode($response);
     //dd($response);
     return view('search', compact('response'));
 });
 
 Route::get('/search/{imdbID}', function ($imdbID){
-$savedmovie = Savedmovie::Create([
+$savedmovie = Savedmovie::firstOrCreate([
     'imdbID' => $imdbID,
     'user_id' => auth()->user()->id
     ]);
